@@ -1,19 +1,21 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
-import Ionicons from "react-native-vector-icons/Ionicons"
-import AntDesign from "react-native-vector-icons/AntDesign"
+import React from "react";
+import { View, Text } from "react-native";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { GOOGLE_API_KEY } from '@env'
 
-export default function SearchBar(props) {
+export default function SearchBar({ cityHandler }) {
   return (
-    <View style={{marginTop: 15, flexDirection: "row"}}>
+    <View style={{ marginTop: 15, flexDirection: "row" }}>
       <GooglePlacesAutocomplete
-        placeholder="Search"
+        query={{ key: GOOGLE_API_KEY }}
         onPress={(data, details = null) => {
           console.log(data.description);
-          const city = data.description.split(",")[0]
-          props.cityHandler(city)
+          const city = data.description.split(",")[0];
+          cityHandler(city);
         }}
+        placeholder="Search"
         styles={{
           textInput: {
             backgroundColor: "#eee",
@@ -31,7 +33,7 @@ export default function SearchBar(props) {
         }}
         renderLeftButton={() => (
           <View style={{ marginLeft: 10 }}>
-            <Ionicons name="location-sharp" sharp={24} />
+            <Ionicons name="location-sharp" size={24} />
           </View>
         )}
         renderRightButton={() => (
@@ -42,7 +44,7 @@ export default function SearchBar(props) {
               backgroundColor: "white",
               padding: 9,
               borderRadius: 30,
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <AntDesign
@@ -55,5 +57,5 @@ export default function SearchBar(props) {
         )}
       />
     </View>
-  )
+  );
 }
