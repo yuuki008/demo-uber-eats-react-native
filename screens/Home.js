@@ -10,7 +10,7 @@ import RestaurantItems, {
 import SearchBar from "../components/home/SearchBar";
 import { YELP_API_KEY } from '@env'
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [restaurantData, setRestaurantData] = useState(localRestaurants);
   const [city, setCity] = useState("San Francisco");
   const [activeTab, setActiveTab] = useState("Delivery");
@@ -36,7 +36,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    console.log('set')
     getRestaurantsFromYelp()
   }, [city, activeTab])
 
@@ -50,7 +49,7 @@ export default function Home() {
         <Categories />
         <RestaurantItems
           restaurantData={restaurantData}
-          // navigation={navigation}
+          navigation={navigation}
         />
       </ScrollView>
       <Divider width={1} />

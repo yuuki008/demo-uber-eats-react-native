@@ -41,15 +41,14 @@ export default function RestaurantItems(props) {
           activeOpacity={1}
           style={{ marginBottom: 30 }}
           onPress={() =>
-            console.log(restaurant.name)
-            // navigation.navigate("RestaurantDetail", {
-            //   name: restaurant.name,
-            //   image: restaurant.image_url,
-            //   price: restaurant.price,
-            //   reviews: restaurant.review_count,
-            //   rating: restaurant.rating,
-            //   categories: restaurant.categories,
-            // })
+            props.navigation.navigate("RestaurantDetail", {
+              name: restaurant.name,
+              image: restaurant.image_url,
+              price: restaurant.price,
+              reviews: restaurant.review_count,
+              rating: restaurant.rating,
+              categories: restaurant.categories,
+            })
           }
         >
           <View
