@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
 // import firebase from "../../firebase";
 import LottieView from "lottie-react-native";
@@ -9,26 +9,22 @@ export default function ViewCart({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // const { items, restaurantName } = useSelector(
-  //   (state) => state.cartReducer.selectedItems
-  // );
+  const { items, restaurantName } = useSelector(
+    (state) => state.cartReducer.selectedItems
+  );
 
-  const restaurantName = "restaurantName"
+  const total = items
+    .map((item) => Number(item.price.replace("$", "")))
+    .reduce((prev, curr) => prev + curr, 0);
 
-  // const total = items
-  //   .map((item) => Number(item.price.replace("$", "")))
-  //   .reduce((prev, curr) => prev + curr, 0);
-
-  // const totalUSD = total.toLocaleString("en", {
-  //   style: "currency",
-  //   currency: "USD",
-  // });
-
-  const totalUSD = "1222"
+  const totalUSD = total.toLocaleString("en", {
+    style: "currency",
+    currency: "USD",
+  });
 
   const addOrderToFireBase = () => {
-    console.log('clicked add order')
     // setLoading(true);
+    console.log('true')
     // const db = firebase.firestore();
     // db.collection("orders")
     //   .add({
@@ -85,9 +81,9 @@ export default function ViewCart({ navigation }) {
         <View style={styles.modalContainer}>
           <View style={styles.modalCheckoutContainer}>
             <Text style={styles.restaurantName}>{restaurantName}</Text>
-            {/* {items.map((item, index) => (
+            {items.map((item, index) => (
               <OrderItem key={index} item={item} />
-            ))} */}
+            ))}
             <View style={styles.subtotalContainer}>
               <Text style={styles.subtotalText}>Subtotal</Text>
               <Text>{totalUSD}</Text>
@@ -118,7 +114,7 @@ export default function ViewCart({ navigation }) {
                     top: 17,
                   }}
                 >
-                  {/* {total ? totalUSD : ""} */}
+                  {total ? totalUSD : ""}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -138,7 +134,7 @@ export default function ViewCart({ navigation }) {
       >
         {checkoutModalContent()}
       </Modal>
-      {/* {total ? (
+      {total ? (
         <View
           style={{
             flex: 1,
@@ -201,7 +197,7 @@ export default function ViewCart({ navigation }) {
         </View>
       ) : (
         <></>
-      )} */}
+      )}
     </>
   );
 }

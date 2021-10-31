@@ -1,8 +1,8 @@
 {
   "dependencies": {
-    "babel-plugin-dotenv-import": "^2.2.0",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/stack": "^6.0.7",
+    "babel-plugin-dotenv-import": "^2.2.0",
     "expo": "~42.0.0",
     "firebase": "8.2.3",
     "lottie-react-native": "^4.0.3",
@@ -18,6 +18,7 @@
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.5",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "redux": "^4.1.2",
     "tslib": "^2.3.1"
   },
   "devDependencies": {

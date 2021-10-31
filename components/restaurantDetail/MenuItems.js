@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { Divider } from "react-native-elements";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-// import { useDispatch } from "react-redux";
-// import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const styles = StyleSheet.create({
   menuItemStyle: {
@@ -24,24 +24,24 @@ export default function MenuItems({
   hideCheckbox,
   marginLeft,
 }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const selectItem = (item, checkboxValue) =>
-  //   dispatch({
-  //     type: "ADD_TO_CART",
-  //     payload: {
-  //       ...item,
-  //       restaurantName: restaurantName,
-  //       checkboxValue: checkboxValue,
-  //     },
-  //   });
+  const selectItem = (item, checkboxValue) =>
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: {
+        ...item,
+        restaurantName: restaurantName,
+        checkboxValue: checkboxValue,
+      },
+    });
 
-  // const cartItems = useSelector(
-  //   (state) => state.cartReducer.selectedItems.items
-  // );
+  const cartItems = useSelector(
+    (state) => state.cartReducer.selectedItems.items
+  );
 
-  // const isFoodInCart = (food, cartItems) =>
-  //   Boolean(cartItems.find((item) => item.title === food.title));
+  const isFoodInCart = (food, cartItems) =>
+    Boolean(cartItems.find((item) => item.title === food.title));
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -54,11 +54,8 @@ export default function MenuItems({
               <BouncyCheckbox
                 iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
                 fillColor="green"
-                isChecked={false}
-                  onPress={(checkboxValue) => {
-                    console.log(checkboxValue)
-                    // selectItem(food, checkboxValue)
-                  }}
+                isChecked={isFoodInCart(food, cartItems)}
+                onPress={(checkboxValue) => selectItem(food, checkboxValue)}
               />
             )}
             <FoodInfo food={food} />
