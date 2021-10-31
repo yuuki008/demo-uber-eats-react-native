@@ -32,36 +32,36 @@ export const localRestaurants = [
   },
 ];
 
-export default function RestaurantItems({ restaurantData }) {
+export default function RestaurantItems(props) {
   return (
     <>
-      {restaurantData.map((restaurant, index) => (
+      {props.restaurantData.map((restaurant, index) => (
         <TouchableOpacity
-        key={index}
-        activeOpacity={1}
-        style={{ marginBottom: 30 }}
-        onPress={() =>
-          // navigation.navigate("RestaurantDetail", {
-          //   name: restaurant.name,
-          //   image: restaurant.image_url,
-          //   price: restaurant.price,
-          //   reviews: restaurant.review_count,
-          //   rating: restaurant.rating,
-          //   categories: restaurant.categories,
-          // })
-          console.log(restaurant.name + ' clicked')
-        }
-      >
-        <View
-          style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
+          key={index}
+          activeOpacity={1}
+          style={{ marginBottom: 30 }}
+          onPress={() =>
+            console.log(restaurant.name)
+            // navigation.navigate("RestaurantDetail", {
+            //   name: restaurant.name,
+            //   image: restaurant.image_url,
+            //   price: restaurant.price,
+            //   reviews: restaurant.review_count,
+            //   rating: restaurant.rating,
+            //   categories: restaurant.categories,
+            // })
+          }
         >
-          <RestaurantImage image={restaurant.image_url} />
-          <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
-        </View>
-      </TouchableOpacity>
+          <View
+            style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
+          >
+            <RestaurantImage image={restaurant.image_url} />
+            <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
+          </View>
+        </TouchableOpacity>
       ))}
     </>
-  )
+  );
 }
 
 const RestaurantImage = (props) => (
@@ -89,7 +89,7 @@ const RestaurantInfo = (props) => (
   >
     <View>
       <Text style={{ fontSize: 15, fontWeight: "bold" }}>{props.name}</Text>
-      <Text style={{ fontSize: 13, color: "gray" }}>30-45・min</Text>
+      <Text style={{ fontSize: 13, color: "gray" }}>30-45 • min</Text>
     </View>
     <View
       style={{
@@ -98,10 +98,10 @@ const RestaurantInfo = (props) => (
         width: 30,
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 15
+        borderRadius: 15,
       }}
     >
       <Text>{props.rating}</Text>
     </View>
   </View>
-)
+);
