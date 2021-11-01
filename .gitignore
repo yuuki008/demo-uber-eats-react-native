@@ -64,3 +64,4 @@ web-build/
 
 # env
 .env
+firebase.js

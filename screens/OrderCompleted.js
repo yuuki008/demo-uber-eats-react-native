@@ -1,10 +1,11 @@
 import React from 'react'
+import { Text } from 'react-native'
 
 export default function OrderCompleted (){
   return (
-    <div>
+    <Text>
       Hello World!
-    </div>
+    </Text>
   )
 }
 

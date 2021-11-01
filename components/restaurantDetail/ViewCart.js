@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
-// import firebase from "../../firebase";
+import firebase from "../../firebase";
 import LottieView from "lottie-react-native";
 
 export default function ViewCart({ navigation }) {
@@ -23,21 +23,20 @@ export default function ViewCart({ navigation }) {
   });
 
   const addOrderToFireBase = () => {
-    // setLoading(true);
-    console.log('true')
-    // const db = firebase.firestore();
-    // db.collection("orders")
-    //   .add({
-    //     items: items,
-    //     restaurantName: restaurantName,
-    //     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    //   })
-    //   .then(() => {
-    //     setTimeout(() => {
-    //       setLoading(false);
-    //       navigation.navigate("OrderCompleted");
-    //     }, 2500);
-    //   });
+    setLoading(true);
+    const db = firebase.firestore();
+    db.collection("orders")
+      .add({
+        items: items,
+        restaurantName: restaurantName,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      })
+      .then(() => {
+        setTimeout(() => {
+          setLoading(false);
+          navigation.navigate("OrderCompleted");
+        }, 2500);
+      });
   };
 
   const styles = StyleSheet.create({
